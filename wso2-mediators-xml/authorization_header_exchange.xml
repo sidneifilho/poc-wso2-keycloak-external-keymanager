@@ -1,0 +1,5 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="authorization_header_exchange">
+    <property name="X-Authorization" expression="get-property('transport', 'X-Authorization')" scope="default" type="STRING"/>
+    <property name="Authorization" expression="get-property('X-Authorization')" scope="transport" type="STRING" description=""/>
+    <property name="X-Authorization" scope="transport" action="remove"/>
+</sequence>

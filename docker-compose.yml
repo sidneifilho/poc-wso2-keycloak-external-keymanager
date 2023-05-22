@@ -1,0 +1,49 @@
+version: '3'
+
+volumes:
+  mysql_data:
+    driver: local
+  wso2apim_data:
+    driver: local
+
+services:
+  db:
+    container_name: db_mysql
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_pwd
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=pa55word
+      - MYSQL_DATABASE=keycloak
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.5
+    environment:
+      - KC_DB=mysql
+      - KC_DB_USERNAME=root
+      - KC_DB_PASSWORD=root_pwd
+      - KC_DB_URL_HOST=db
+      - KC_DB_URL_PORT=3306
+      - KC_DB_SCHEMA=keycloak
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command: start-dev
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    depends_on:
+      - db
+  wso2-api-manager:
+    image: wso2/wso2am:3.2.0
+    volumes:
+      - wso2apim_data:/home/wso2carbon/wso2am-3.2.0/repository/deployment/server
+    ports:
+      - 8280:8280
+      - 8243:8243
+      - 9443:9443

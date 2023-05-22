@@ -1,0 +1,34 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+**/main/resources/application-dev.properties
+src/main/resources/application-local.properties
+**/main/resources/application-prd.properties
+**/main/resources/application-test.properties
+**/test/resources/application-test.properties
+**/test-output
+
+.DS_Store
+.idea

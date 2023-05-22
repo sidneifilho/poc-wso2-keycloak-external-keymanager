@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "a5044e27-3361-4ef8-9104-851f090154f0",
+		"name": "WSO2 API Manager - Security External IAM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5947916"
+	},
+	"item": [
+		{
+			"name": "Get Token - Password credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"const response = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", response.access_token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic ODBkZWViMmUtOTE4Zi00YTViLWI1YjQtNjdlNThhMGFiNDFmOjFRNXU3aWNNZXkyZmtXWGpwdk5WTTRsNWdUeWtJZGpM"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/customerRennerBR/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"customerRennerBR",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token - Client credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"const response = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", response.access_token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{consumerKey}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{consumerSecret}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/customerRennerBR/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"customerRennerBR",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pizza API - Get Menu",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{apimHost}}/pizzashack/1.0.0/menu",
+					"host": [
+						"{{apimHost}}"
+					],
+					"path": [
+						"pizzashack",
+						"1.0.0",
+						"menu"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
