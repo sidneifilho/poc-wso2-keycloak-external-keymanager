@@ -1,4 +1,4 @@
-# poc-service-auth-wso2-keycloak
+# POC - Configuring Keycloak as External Key manager inside WSO2 API Manager
 
 # Setup
 Para iniciar a execução do projeto primeiro temos que subir as aplicações no Docker. Para isso basta executar o comando no terminal: docker-compose up -d
